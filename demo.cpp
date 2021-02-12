@@ -229,36 +229,9 @@ public:
 
                 if(!fixed[id])
                 {
-                    std::vector<double> mov(3, 0);
 
                     auto clothmult = 20.0;
 
-                    /*
-
-                    if(x > 0)
-                    {
-                        double dist = vec_dist(points[to_id(x, y)], points[to_id(x-1, y)]);
-                        if(dist > 1)
-                        {
-                            std::vector<double> tmov(3, 0);
-                            vec_sub(points[to_id(x, y)], points[to_id(x-1, y)], tmov);
-                            double mult = (dist-1)/dist;
-                            vec_mult(tmov, mult, tmov);
-                            vec_add(tmov, mov, mov);
-                        }
-                    }
-                    if(x < 9)
-                    {
-                        double dist = vec_dist(points[to_id(x, y)], points[to_id(x+1, y)]);
-                        if(dist > 1)
-                        {
-                            std::vector<double> tmov(3, 0);
-                            vec_sub(points[to_id(x, y)], points[to_id(x+1, y)], tmov);
-                            double mult = (dist-1)/dist;
-                            vec_mult(tmov, mult, tmov);
-                            vec_add(tmov, mov, mov);
-                        }
-                    } */
 
                     if(y > 0)
                     {
@@ -321,7 +294,6 @@ public:
                             vec_add(tmov, speed[id], speed[id]);
                         }
                     }
-                    vec_add(mov, points[to_id(x, y)], points[to_id(x, y)]);
 
 
                     // Gravity
@@ -427,7 +399,6 @@ int main()
     while(!g.end)
     {
         main_loop();
-        //SDL_Delay(100);
     }
 
     return 0;
@@ -440,13 +411,7 @@ void main_loop()
     {
         event_handler();
         g.update_ticks();
-
         {
-            /*        if((rand()%100) > 10)
-                    {
-                        drops.push_back(new Drop());
-                    }*/
-
             for (int i = 0; i<(int) DPS*g.time_mult; i++)
                 drops.push_back(new Drop());
             for(auto d : drops)
@@ -461,7 +426,6 @@ void main_loop()
             });
             drops.erase(rem, drops.end());
         }
-
         cloth.update();
 
         // wind
