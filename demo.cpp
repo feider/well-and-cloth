@@ -230,7 +230,7 @@ public:
                 if(!fixed[id])
                 {
 
-                    auto clothmult = 20.0;
+                    auto clothmult = 25.0;
 
 
                     if(y > 0)
@@ -241,7 +241,8 @@ public:
                             std::vector<double> tmov(3, 0);
                             vec_sub(points[to_id(x, y)], points[to_id(x, y-1)], tmov);
                             double mult = dist;
-                            mult *= mult*g.time_mult*clothmult;
+                            //mult *= mult*g.time_mult*clothmult;
+                            mult = (exp(mult)-exp(1))*g.time_mult*clothmult;
                             vec_mult(tmov, 1.0/dist, tmov);
                             vec_mult(tmov, -mult, tmov);
                             vec_add(tmov, speed[id], speed[id]);
@@ -257,7 +258,8 @@ public:
                             std::vector<double> tmov(3, 0);
                             vec_sub(points[to_id(x, y)], points[to_id(x, y+1)], tmov);
                             double mult = dist;
-                            mult *= mult*g.time_mult*clothmult;
+                            // mult *= mult*g.time_mult*clothmult; 
+                            mult = (exp(mult)-exp(1))*g.time_mult*clothmult;
                             vec_mult(tmov, 1.0/dist, tmov);
                             vec_mult(tmov, -mult, tmov);
                             vec_add(tmov, speed[id], speed[id]);
@@ -272,7 +274,8 @@ public:
                             std::vector<double> tmov(3, 0);
                             vec_sub(points[to_id(x, y)], points[to_id(x-1, y)], tmov);
                             double mult = dist;
-                            mult *= mult*g.time_mult*clothmult;
+                            // mult *= mult*g.time_mult*clothmult;
+                            mult = (exp(mult)-exp(1))*g.time_mult*clothmult;
                             vec_mult(tmov, 1.0/dist, tmov);
                             vec_mult(tmov, -mult, tmov);
                             vec_add(tmov, speed[id], speed[id]);
@@ -288,7 +291,8 @@ public:
                             std::vector<double> tmov(3, 0);
                             vec_sub(points[to_id(x, y)], points[to_id(x+1, y)], tmov);
                             double mult = dist;
-                            mult *= mult*g.time_mult*clothmult;
+                            //mult *= mult*g.time_mult*clothmult;
+                            mult = (exp(mult)-exp(1))*g.time_mult*clothmult;
                             vec_mult(tmov, 1.0/dist, tmov);
                             vec_mult(tmov, -mult, tmov);
                             vec_add(tmov, speed[id], speed[id]);
