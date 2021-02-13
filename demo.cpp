@@ -184,7 +184,7 @@ public:
 };
 
 
-std::vector<Drop*> drops;
+std::vector<Drop> drops;
 
 class Cloth
 {
@@ -394,7 +394,7 @@ int main()
     g.ticks_begin = SDL_GetTicks();
     g.update_ticks();
 
-    drops.push_back(new Drop());
+    drops.push_back(Drop());
 
     while(!g.end)
     {
@@ -413,16 +413,13 @@ void main_loop()
         g.update_ticks();
         {
             for (int i = 0; i<(int) DPS*g.time_mult; i++)
-                drops.push_back(new Drop());
-            for(auto d : drops)
+                drops.push_back(Drop());
+            for(auto & d : drops)
             {
-                d->update();
-                if(!d->alive)
-                {
-                }
+                d.update();
             }
             auto rem = std::remove_if(drops.begin(),drops.end(), [](auto const & i) {
-                return !i->alive;
+                return !i.alive;
             });
             drops.erase(rem, drops.end());
         }
@@ -458,9 +455,9 @@ void compose_screen()
     //
     cloth.render();
 
-    for(auto d : drops)
+    for(auto & d : drops)
     {
-        d->render();
+        d.render();
     }
 
 
